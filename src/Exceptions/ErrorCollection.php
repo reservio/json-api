@@ -25,6 +25,7 @@ use \Neomerx\JsonApi\Document\Error;
 use \Neomerx\JsonApi\Contracts\Document\LinkInterface;
 use \Neomerx\JsonApi\Contracts\Document\ErrorInterface;
 use \Neomerx\JsonApi\Contracts\Document\DocumentInterface;
+use Traversable;
 
 /**
  * @package Neomerx\JsonApi
@@ -41,7 +42,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     /**
      * @inheritdoc
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
     }
@@ -49,7 +50,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     /**
      * @inheritdoc
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -73,7 +74,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     /**
      * @inheritdoc
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->items);
     }
@@ -83,7 +84,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
      *
      * @return ErrorInterface
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->items[$offset];
     }
@@ -91,7 +92,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     /**
      * @inheritdoc
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $offset === null ? $this->add($value) : $this->items[$offset] = $value;
     }
@@ -99,7 +100,7 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
     /**
      * @inheritdoc
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->items[$offset]);
     }
