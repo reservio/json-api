@@ -464,4 +464,16 @@ class ErrorCollection implements IteratorAggregate, ArrayAccess, Serializable, C
         return $this->getPathToRelationship($name) . '/' .
             DocumentInterface::KEYWORD_DATA . '/' . DocumentInterface::KEYWORD_ID;
     }
+
+
+    public function __serialize(): array
+    {
+        return $this->items;
+    }
+
+
+    public function __unserialize(array $data): void
+    {
+        $this->items = $data;
+    }
 }
